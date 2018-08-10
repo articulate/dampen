@@ -1,6 +1,6 @@
 {
   "name": "dampen",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Debounce any redux action-creator",
   "main": "dist.js",
   "repository": "git@github.com:articulate/dampen.git",
