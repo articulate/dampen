@@ -6,6 +6,12 @@
   "repository": "git@github.com:articulate/dampen.git",
   "author": "articulate",
   "license": "MIT",
+  "keywords": [
+    "action",
+    "action-creator",
+    "debounce",
+    "redux"
+  ],
   "nyc": {
     "check-coverage": true,
     "branches": 100,
