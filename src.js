@@ -1,22 +1,27 @@
-const dampen = (wait, action) => {
-  let args = []
-  let disp = Function.prototype
-  let timeout = 0
+/**
+ * Creates a debounced function that delays invoking the Redux action creator until after wait milliseconds have elapsed
+ * since the last time the debounced function was invoked.
+ *
+ * @param {number} wait - The number of milliseconds to delay
+ * @param {Function} actionCreator - The Redux action creator to debounce
+ * @returns {Function} - The new debounced function
+ */
+const debounceActionCreator = (wait, actionCreator) => {
+  let timeoutId = null;
 
-  const dampened = (...nextArgs) => dispatch => {
-    args = nextArgs
-    disp = dispatch
+  const debounced =
+    (...args) =>
+    (dispatch) => {
+      const later = () => {
+        timeoutId = null;
+        dispatch(actionCreator(...args));
+      };
 
-    clearTimeout(timeout)
-    timeout = setTimeout(run, wait)
-  }
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(later, wait);
+    };
 
-  const run = () => {
-    timeout = 0
-    disp(action(...args))
-  }
+  return debounced;
+};
 
-  return dampened
-}
-
-module.exports = dampen
+module.exports = debounceActionCreator;
